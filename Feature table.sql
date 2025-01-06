@@ -1,0 +1,4 @@
+CREATE TABLE CW2.FEATURE (
+    trailFeatureID INT IDENTITY(1,1) PRIMARY KEY,
+    trailFeature VARCHAR(255)
+);
