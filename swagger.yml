@@ -1,0 +1,63 @@
+openapi: 3.0.0
+info:
+  title: "Trail Management API"
+  description: "Api for managing trails"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+# components:
+#   schemas:
+#     Trail:
+#       type: "object"
+#       properties:
+#         id:
+#           type: "integer"
+#           format: "int64"
+#         name:
+#           type: "string"
+#         summary:
+#           type: "string"
+#         description:
+#           type: "string"
+#         difficulty:
+#           type: "string"
+#           enum:
+#             - "easy"
+#             - "medium"
+#             - "hard"
+#         location:
+#           type: "string"
+#         length:
+#           type: "number"
+#           format: "float"
+#         elevation_gain:
+#           type: "number"
+#           format: "float"
+#         route_type:
+#           type: "string"
+#           enum:
+#             - "out_and_back"
+#             - "loop"
+#             - "point_to_point"
+#         owner_id:
+#           type: "integer"
+#           format: "int64"
+
+paths:
+  /trails:
+    get:
+      operationId: "trails.read_all"
+      tags:
+        - "Trails"
+      summary: "Get all trails"
+      responses:
+        "200":
+          description: "Successfully read people list"
+          # content:
+          #   application/json:
+          #     schema:
+          #       type: "array"
+          #       items:
+          #         $ref: "#/components/schemas/Trail"
