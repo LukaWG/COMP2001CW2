@@ -3,6 +3,8 @@ import connexion
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 
+from authDetails import AccountInformation
+
 basedir = pathlib.Path(__file__).parent.resolve()
 connex_app = connexion.App(__name__, specification_dir=basedir)
 
@@ -21,3 +23,5 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
+accountInformation = AccountInformation()
