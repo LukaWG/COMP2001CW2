@@ -3,6 +3,7 @@ class AccountInformation:
         self.userID = None
         self.emailAddress = None
         self.isLoggedIn = False
+        self.isAdmin = False
 
     def login(self, emailAddress):
         self.emailAddress = emailAddress
@@ -28,3 +29,9 @@ class AccountInformation:
     
     def set_user_id(self, userID):
         self.userID = userID
+
+    def is_admin(self):
+        return self.isAdmin
+    
+    def set_admin(self, isAdmin):
+        self.isAdmin = isAdmin

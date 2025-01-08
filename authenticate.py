@@ -31,6 +31,11 @@ def login():
             else:
                 accountInformation.set_user_id(user.userID)
 
+                # Get the user's role from the response
+                role = user.role
+                if (role == "admin"):
+                    accountInformation.set_admin(True)
+
             return json_response, 200
         except requests.JSONDecodeError:
             print("Response is not JSON")
