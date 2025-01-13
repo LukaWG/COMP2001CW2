@@ -1,4 +1,4 @@
-# COMP2001 CW2 | Trail Service MicroService
+# COMP2001 CW2<br>Trail Service MicroService
 This microservice provides an API for managing trails, locations, features, and their relationships. It has been built using Flask, SQLAlchemy, and Marshmallow, and it uses a Microsoft SQL Server for the database.
 
 ## Features
