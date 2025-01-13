@@ -22,14 +22,11 @@ def create():
     
     trail = request.get_json()
     trailName = trail.get("trailName")
-    existing_trail = (
-        db.session.query(Trail).filter(Trail.trailName == trailName).one_or_none()
-        # Trail.query.filter(Trail.trailName == trailName)
-        # .one_or_none()
-    )
+    existing_trail = (db.session.query(Trail).filter(Trail.trailName == trailName).one_or_none())
 
     if existing_trail is None:
-        # schema = TrailSchema()
+        # Add owner ID to trail
+        trail["ownerID"] = accountInformation.get_user_id()
         new_trail = trail_schema.load(trail, session=db.session)
         db.session.add(new_trail)
         db.session.commit()

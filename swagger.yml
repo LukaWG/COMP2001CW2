@@ -55,6 +55,26 @@ components:
         ownerID:
           type: integer
 
+    Feature:
+      type: object
+      properties:
+        featureID:
+          type: integer
+        trailFeature:
+          type: string
+
+    Location:
+      type: object
+      properties:
+        latitude:
+          format: float
+        longitude:
+          format: float
+        description:
+          type: string
+        locationPointID:
+          type: integer
+
 paths:
   /users/login:
     post:
@@ -256,9 +276,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
+                $ref: "#/components/schemas/Feature"
     
     post:
       summary: Create a feature
@@ -270,9 +288,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                trailFeature:
-                  type: string
+              $ref: "#/components/schemas/Feature"
       responses:
         201:
           description: Created
@@ -301,7 +317,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: "#/components/schemas/Feature"
         404:
           description: Feature not found
           content:
@@ -327,9 +343,7 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                trailFeature:
-                  type: string
+              $ref: "#/components/schemas/Feature"
       responses:
         200:
           description: Updated
@@ -380,7 +394,7 @@ paths:
       summary: Add a feature to a trail
       operationId: trailFeatures.create
       tags:
-        - Trail Features
+        - Trail Features Link
       requestBody:
         required: true
         content:
@@ -404,7 +418,7 @@ paths:
       summary: Get all features of a trail
       operationId: trailFeatures.read_features_for_trail
       tags:
-        - Trail Features
+        - Trail Features Link
       parameters:
         - name: trailID
           in: path
@@ -434,7 +448,7 @@ paths:
       summary: Remove a feature from a trail
       operationId: trailFeatures.delete
       tags:
-        - Trail Features
+        - Trail Features Link
       parameters:
         - name: trailID
           in: path
@@ -464,8 +478,231 @@ paths:
                 items:
                   type: string
 
+  /location:
+    get:
+      summary: Get a list of all points
+      operationId: locations.read_all
+      tags:
+        - Locations
+      responses:
+        200:
+          description: A list of trails
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Location"
+        404:
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+    post: 
+      summary: Create a location
+      operationId: locations.create
+      tags:
+        - Locations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Location"
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: string
+
+  /location/{locationPointID}:
+    get:
+      summary: Get a location
+      operationId: locations.read_one
+      tags:
+        - Locations
+      parameters:
+        - name: locationPointID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A location
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Location"
+        404:
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+    put:
+      summary: Update a location
+      operationId: locations.update
+      tags:
+        - Locations
+      parameters:
+        - name: locationPointID
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Location"
+      responses:
+        200:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                type: string
+        404:
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+    delete:
+      summary: Delete a location
+      operationId: locations.delete
+      tags:
+        - Locations
+      parameters:
+        - name: locationPointID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        404:
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      
+  /trailLocations:
+    post:
+      summary: Add a location to a trail
+      operationId: trailLocations.create
+      tags:
+        - Trail Locations Link
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                trailID:
+                  type: integer
+                locationPointID:
+                  type: integer
+                orderNo:
+                  type: integer
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: string
+
+  /trailLocations/{trailID}:
+    get:
+      summary: Get all locations of a trail
+      operationId: trailLocations.read_locations_for_trail
+      tags:
+        - Trail Locations Link
+      parameters:
+        - name: trailID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A list of locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Location"
+        404:
+          description: Trail not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /trailLocations/{trailID}/{locationPointID}:
+    delete:
+      summary: Remove a location from a trail
+      operationId: trailLocations.delete
+      tags:
+        - Trail Locations Link
+      parameters:
+        - name: trailID
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: locationPointID
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        404:
+          description: Trail or location not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
 tags:
   - name: Authentication
   - name: Trails
   - name: Features
-  - name: Trail Features
+  - name: Trail Features Link
+  - name: Locations

@@ -45,7 +45,7 @@ class Location_Point(db.Model):
     __tablename__ = "LOCATION_POINT"
     __table_args__ = {'schema': 'CW2'}
     
-    locationPoint = db.Column(db.Integer, primary_key=True)
+    locationPointID = db.Column(db.Integer, primary_key=True)
     latitude = db.Column(db.Numeric(9, 6))
     longitude = db.Column(db.Numeric(9, 6))
     description = db.Column(db.Text)
@@ -117,7 +117,7 @@ class Trail_LocationPt(db.Model):
     __table_args__ = {'schema': 'CW2'}
     
     trailID = db.Column(db.Integer, db.ForeignKey('CW2.TRAIL.trailID'), primary_key=True)
-    locationPoint = db.Column(db.Integer, db.ForeignKey('CW2.LOCATION_POINT.locationPoint'), primary_key=True)
+    locationPointID = db.Column(db.Integer, db.ForeignKey('CW2.LOCATION_POINT.locationPointID'), primary_key=True)
     orderNo = db.Column(db.Integer)
 
     trail = db.relationship('Trail', backref=db.backref('trail_locationpts', lazy=True))
@@ -128,6 +128,9 @@ class Trail_LocationPtSchema(ma.SQLAlchemyAutoSchema):
         model = Trail_LocationPt
         load_instance = True
         sqla_session = db.session
+
+    locationPointID = ma.Integer()
+    trailID = ma.Integer()
 
 trail_locationpt_schema = Trail_LocationPtSchema()
 trail_locationpts_schema = Trail_LocationPtSchema(many=True)

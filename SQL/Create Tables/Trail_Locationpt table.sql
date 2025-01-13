@@ -1,8 +1,8 @@
 CREATE TABLE CW2.TRAIL_LOCATIONPT (
     trailID INT,
-    locationPoint INT,
+    locationPointID INT,
     orderNo INT,
-    PRIMARY KEY (trailID, locationPoint),
+    PRIMARY KEY (trailID, locationPointID),
     FOREIGN KEY (trailID) REFERENCES CW2.TRAIL(trailID),
-    FOREIGN KEY (locationPoint) REFERENCES CW2.LOCATION_POINT(locationPoint)
+    FOREIGN KEY (locationPointID) REFERENCES CW2.LOCATION_POINT(locationPointID)
 );
