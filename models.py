@@ -1,6 +1,3 @@
-from datetime import datetime
-import pytz
-
 from config import db, ma
 
 #region USER
