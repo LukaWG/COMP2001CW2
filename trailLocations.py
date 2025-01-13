@@ -19,7 +19,7 @@ def read_locations_for_trail(trailID):
 def create():
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     
     trailLocation = request.get_json()
@@ -40,7 +40,7 @@ def create():
 def delete(trailID, locationPointID):
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     trailLocation = Trail_LocationPt.query.filter(Trail_LocationPt.trailID == trailID, Trail_LocationPt.locationPointID == locationPointID).one_or_none()
     if trailLocation is not None:

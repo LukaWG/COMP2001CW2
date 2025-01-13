@@ -17,7 +17,7 @@ def read_one(locationPointID):
 def create():
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     location = request.get_json()
     lat = location.get("latitude")
@@ -35,7 +35,7 @@ def create():
 def update(locationPointID):
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     location = request.get_json()
 
@@ -53,7 +53,7 @@ def update(locationPointID):
 def delete(locationPointID):
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
 
     location = Location_Point.query.filter(Location_Point.locationPointID == locationPointID).one_or_none()
     if location is not None:

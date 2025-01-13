@@ -17,7 +17,7 @@ def read_features_for_trail(trailID):
 def create():
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     trailFeature = request.get_json()
     trailId = trailFeature.get("trailId")
@@ -37,7 +37,7 @@ def create():
 def delete(trailID, trailFeatureID):
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     trailFeature = Trail_Feature.query.filter(Trail_Feature.trailID == trailID, Trail_Feature.trailFeatureID == trailFeatureID).one_or_none()
     if trailFeature is not None:

@@ -9,7 +9,6 @@ def read_all():
 
 def read_one(trailID):
     trail = db.session.query(Trail).filter(Trail.trailID == trailID).one_or_none()
-    # trail = Trail.query.filter(Trail.trailID == trailID).one_or_none()
     if trail is not None:
         return trail_schema.dump(trail)
     else:
@@ -18,7 +17,7 @@ def read_one(trailID):
 def create():
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     trail = request.get_json()
     trailName = trail.get("trailName")
@@ -37,13 +36,11 @@ def create():
 def update(trailID):
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     trail = request.get_json()
 
-    update_trail = Trail.query.filter(
-        Trail.trailID == trailID
-    ).one_or_none()
+    update_trail = Trail.query.filter(Trail.trailID == trailID).one_or_none()
 
     if update_trail is not None:
         update = trail_schema.load(trail, session=db.session)
@@ -57,7 +54,7 @@ def update(trailID):
 def delete(trailID):
     # Check if user is an admin
     if not accountInformation.is_admin():
-        return "Unauthorized", 403
+        return "Unauthorised", 403
     
     trail = Trail.query.filter(Trail.trailID == trailID).one_or_none()
     if trail is not None:
