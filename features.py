@@ -1,4 +1,4 @@
-from flask import make_response, abort, request
+from flask import abort, request
 
 from config import db, accountInformation
 from models import Feature, feature_schema, features_schema

@@ -1,5 +1,5 @@
 import requests
-from flask import make_response, abort, request
+from flask import request
 
 from config import accountInformation
 from models import User

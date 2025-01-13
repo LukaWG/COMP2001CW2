@@ -1,7 +1,7 @@
-from flask import make_response, abort, request
+from flask import abort, request
 
 from config import db
-from models import User, user_schema, users_schema
+from models import User, user_schema
 
 # def read_all():
 #     people = db.session.query(User).all()

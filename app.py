@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify
+from flask import render_template
 import config
 
 app = config.connex_app
